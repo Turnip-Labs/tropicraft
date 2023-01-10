@@ -19,25 +19,25 @@ public class WorldGenTreeShapePalm extends WorldGenerator {
     }
 
     @Override
-    public boolean generate(World world, Random random, int i, int j, int k) {
+    public boolean generate(World world, Random random, int x, int y, int z) {
         byte byte0 = 5;
         boolean flag = true;
 
-        if (j >= 1 && j + byte0 + 1 <= 128) {
+        if (y >= 1 && y + byte0 + 1 <= 128) {
             int i1;
             int l1;
-            for (i1 = j; i1 <= j + 1 + byte0; ++i1) {
+            for (i1 = y; i1 <= y + 1 + byte0; ++i1) {
                 byte j1 = 1;
-                if (i1 == j) {
+                if (i1 == y) {
                     j1 = 0;
                 }
 
-                if (i1 >= j + 1 + byte0 - 2) {
+                if (i1 >= y + 1 + byte0 - 2) {
                     j1 = 2;
                 }
 
-                for (l1 = i - j1; l1 <= i + j1 && flag; ++l1) {
-                    for (int i2 = k - j1; i2 <= k + j1 && flag; ++i2) {
+                for (l1 = x - j1; l1 <= x + j1 && flag; ++l1) {
+                    for (int i2 = z - j1; i2 <= z + j1 && flag; ++i2) {
                         if (i1 >= 0 && i1 < 128) {
                             int j2 = world.getBlockId(l1, i1, i2);
                             if (j2 != 0 && j2 != leavesID) {
@@ -52,60 +52,65 @@ public class WorldGenTreeShapePalm extends WorldGenerator {
             if(!flag) {
                 return false;
             } else {
-                i1 = world.getBlockId(i, j - 1, k);
-                if (i1 == Mod_Tropicraft.sandPurified.blockID && j < 128 - byte0 - 1) {
-                    world.setBlock(i, j - 1, k, Mod_Tropicraft.sandPurified.blockID);
-                    world.setBlock(i, j + 9, k, leavesID);
-                    world.setBlock(i, j + 8, k + 1, leavesID);
-                    world.setBlock(i, j + 8, k + 2, leavesID);
-                    world.setBlock(i, j + 8, k + 3, leavesID);
-                    world.setBlock(i, j + 7, k + 4, leavesID);
-                    world.setBlock(i + 1, j + 8, k, leavesID);
-                    world.setBlock(i + 2, j + 8, k, leavesID);
-                    world.setBlock(i + 3, j + 8, k, leavesID);
-                    world.setBlock(i + 4, j + 7, k, leavesID);
-                    world.setBlock(i, j + 8, k - 1, leavesID);
-                    world.setBlock(i, j + 8, k - 2, leavesID);
-                    world.setBlock(i, j + 8, k - 3, leavesID);
-                    world.setBlock(i, j + 7, k - 4, leavesID);
-                    world.setBlock(i - 1, j + 8, k, leavesID);
-                    world.setBlock(i - 1, j + 8, k - 1, leavesID);
-                    world.setBlock(i - 1, j + 8, k + 1, leavesID);
-                    world.setBlock(i + 1, j + 8, k - 1, leavesID);
-                    world.setBlock(i + 1, j + 8, k + 1, leavesID);
-                    world.setBlock(i - 2, j + 8, k, leavesID);
-                    world.setBlock(i - 3, j + 8, k, leavesID);
-                    world.setBlock(i - 4, j + 7, k, leavesID);
-                    world.setBlock(i + 2, j + 8, k + 2, leavesID);
-                    world.setBlock(i + 2, j + 8, k - 2, leavesID);
-                    world.setBlock(i - 2, j + 8, k + 2, leavesID);
-                    world.setBlock(i - 2, j + 8, k - 2, leavesID);
-                    world.setBlock(i + 3, j + 7, k + 3, leavesID);
-                    world.setBlock(i + 3, j + 7, k - 3, leavesID);
-                    world.setBlock(i - 3, j + 7, k + 3, leavesID);
-                    world.setBlock(i - 3, j + 7, k - 3, leavesID);
+                i1 = world.getBlockId(x, y - 1, z);
+                if (i1 == Mod_Tropicraft.sandPurified.blockID && y < 128 - byte0 - 1) {
+                    world.setBlock(x, y - 1, z, Mod_Tropicraft.sandPurified.blockID);
+                    world.setBlock(x, y + 9, z, leavesID);
+                    world.setBlock(x, y + 8, z + 1, leavesID);
+                    world.setBlock(x, y + 8, z + 2, leavesID);
+                    world.setBlock(x, y + 8, z + 3, leavesID);
+                    world.setBlock(x, y + 7, z + 4, leavesID);
+                    world.setBlock(x + 1, y + 8, z, leavesID);
+                    world.setBlock(x + 2, y + 8, z, leavesID);
+                    world.setBlock(x + 3, y + 8, z, leavesID);
+                    world.setBlock(x + 4, y + 7, z, leavesID);
+                    world.setBlock(x, y + 8, z - 1, leavesID);
+                    world.setBlock(x, y + 8, z - 2, leavesID);
+                    world.setBlock(x, y + 8, z - 3, leavesID);
+                    world.setBlock(x, y + 7, z - 4, leavesID);
+                    world.setBlock(x - 1, y + 8, z, leavesID);
+                    world.setBlock(x - 1, y + 8, z - 1, leavesID);
+                    world.setBlock(x - 1, y + 8, z + 1, leavesID);
+                    world.setBlock(x + 1, y + 8, z - 1, leavesID);
+                    world.setBlock(x + 1, y + 8, z + 1, leavesID);
+                    world.setBlock(x - 2, y + 8, z, leavesID);
+                    world.setBlock(x - 3, y + 8, z, leavesID);
+                    world.setBlock(x - 4, y + 7, z, leavesID);
+                    world.setBlock(x + 2, y + 8, z + 2, leavesID);
+                    world.setBlock(x + 2, y + 8, z - 2, leavesID);
+                    world.setBlock(x - 2, y + 8, z + 2, leavesID);
+                    world.setBlock(x - 2, y + 8, z - 2, leavesID);
+                    world.setBlock(x + 3, y + 7, z + 3, leavesID);
+                    world.setBlock(x + 3, y + 7, z - 3, leavesID);
+                    world.setBlock(x - 3, y + 7, z + 3, leavesID);
+                    world.setBlock(x - 3, y + 7, z - 3, leavesID);
 
                     for (int var13 = 0; var13 < byte0 + 6; ++var13) {
-                        l1 = world.getBlockId(i, j + var13, k);
+                        l1 = world.getBlockId(x, y + var13, z);
                         if (l1 == 0 || l1 == leavesID) {
-                            world.setBlock(i, j + var13 - 2, k, logID);
+                            world.setBlock(x, y + var13 - 2, z, logID);
                             if (var13 > byte0 - 1 && var13 < byte0 + 1) {
                                 random.nextInt(1);
                                 int pr = random.nextInt(4);
-                                if(pr == 0) {
-                                    world.setBlock(i - 1, j + var13 + 2, k, coconutID);
-                                } else if (pr == 1) {
-                                    world.setBlock(i - 1, j + var13 + 2, k, coconutID);
-                                    world.setBlock(i, j + var13 + 2, k - 1, coconutID);
-                                } else if (pr == 2) {
-                                    world.setBlock(i - 1, j + var13 + 2, k, coconutID);
-                                    world.setBlock(i, j + var13 + 2, k - 1, coconutID);
-                                    world.setBlock(i + 1, j + var13 + 2, k, coconutID);
-                                } else {
-                                    world.setBlock(i - 1, j + var13 + 2, k, coconutID);
-                                    world.setBlock(i, j + var13 + 2, k - 1, coconutID);
-                                    world.setBlock(i + 1, j + var13 + 2, k, coconutID);
-                                    world.setBlock(i, j + var13 + 2, k + 1, coconutID);
+                                switch (pr) {
+                                    case 0:
+                                        world.setBlock(x - 1, y + var13 + 2, z, coconutID);
+                                        break;
+                                    case 1:
+                                        world.setBlock(x - 1, y + var13 + 2, z, coconutID);
+                                        world.setBlock(x, y + var13 + 2, z - 1, coconutID);
+                                        break;
+                                    case 2:
+                                        world.setBlock(x - 1, y + var13 + 2, z, coconutID);
+                                        world.setBlock(x, y + var13 + 2, z - 1, coconutID);
+                                        world.setBlock(x + 1, y + var13 + 2, z, coconutID);
+                                        break;
+                                    default:
+                                        world.setBlock(x - 1, y + var13 + 2, z, coconutID);
+                                        world.setBlock(x, y + var13 + 2, z - 1, coconutID);
+                                        world.setBlock(x + 1, y + var13 + 2, z, coconutID);
+                                        world.setBlock(x, y + var13 + 2, z + 1, coconutID);
+                                        break;
                                 }
                             }
                         }

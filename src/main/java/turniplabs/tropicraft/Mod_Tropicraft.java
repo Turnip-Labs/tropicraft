@@ -3,15 +3,19 @@ package turniplabs.tropicraft;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.src.*;
 import net.minecraft.src.material.ArmorMaterial;
-import turniplabs.halplibe.helper.ArmorHelper;
-import turniplabs.halplibe.helper.BlockHelper;
-import turniplabs.halplibe.helper.RecipeHelper;
-import turniplabs.halplibe.helper.TextureHelper;
+import turniplabs.halplibe.helper.*;
 import turniplabs.halplibe.mixin.helper.BlockInterface;
 import turniplabs.halplibe.mixin.helper.CraftingManagerInterface;
 import turniplabs.tropicraft.block.*;
+import turniplabs.tropicraft.entity.*;
+import turniplabs.tropicraft.entity.model.*;
+import turniplabs.tropicraft.entity.render.*;
+import turniplabs.tropicraft.item.ItemIris;
 import turniplabs.tropicraft.item.ItemPinaColada;
 import turniplabs.tropicraft.item.ItemFoodPineapple;
+import turniplabs.tropicraft.item.ItemSeedsPineapple;
+
+import java.util.ArrayList;
 
 
 public class Mod_Tropicraft implements ModInitializer {
@@ -49,23 +53,22 @@ public class Mod_Tropicraft implements ModInitializer {
     public static final Block thatchStairs = BlockHelper.createBlock(new BlockStairs(1020, thatch), name("stairs.thatch"), 28, 1, Block.soundGrassFootstep, 0.6f, 0.6f, 0.0f);
 
     // Items
-    // TODO functionality for pineapple, pineapple seeds, and iris
     public static final Item bambooItem = new ItemSugarcane(1000, bambooBlock).setIconCoord(17,0).setItemName(name("bamboo"));
     public static final Item bambooMug = new Item(1001).setIconCoord(18,0).setItemName(name("mug"));
     public static final Item bambooMugFull = new ItemPinaColada(1002).setIconCoord(19,0).setItemName(name("mug.full"));
     public static final Item coconutChunk = new ItemFoodStackable(1003, 2, false, 4).setIconCoord(20,0).setItemName(name("food.coconut"));
     public static final Item frogLeg = new ItemFood(1004, 1, true).setIconCoord(21,0).setItemName(name("food.frog.raw"));
-    public static final Item FrogLegCooked = new ItemFood(1005,5,false).setIconCoord(22,0).setItemName(name("food.frog.cooked"));
+    public static final Item frogLegCooked = new ItemFood(1005,5,true).setIconCoord(22,0).setItemName(name("food.frog.cooked"));
     public static final Item frogSkin = new Item(1006).setIconCoord(23,0).setItemName(name("frog.skin"));
-    public static final Item iris = new Item(1007).setIconCoord(24,0).setItemName(name("iris"));
+    public static final Item iris = new ItemIris(1007).setIconCoord(24,0).setItemName(name("iris"));
     public static final Item pineapple = new ItemFoodPineapple(1008,2, false).setIconCoord(25,0).setItemName(name("food.pineapple"));
-    public static final Item pineappleSeeds = new Item(1009).setIconCoord(26,0).setItemName(name("seeds.pineapple"));
+    public static final Item pineappleSeeds = new ItemSeedsPineapple(1009).setIconCoord(26,0).setItemName(name("seeds.pineapple"));
     public static final Item scale = new Item(1010).setIconCoord(27,0).setItemName(name("scale"));
     public static final Item scaleHelmet = new ItemArmor(1011, scaleMaterial, 0).setIconCoord(16, 0).setItemName(name("armor.helmet.scale"));
     public static final Item scaleChestplate = new ItemArmor(1012, scaleMaterial, 1).setIconCoord(16, 1).setItemName(name("armor.chestplate.scale"));
     public static final Item scaleLeggings = new ItemArmor(1013, scaleMaterial, 2).setIconCoord(16, 2).setItemName(name("armor.leggings.scale"));
     public static final Item scaleBoots = new ItemArmor(1014, scaleMaterial, 3).setIconCoord(16, 3).setItemName(name("armor.boots.scale"));
-    public static final Item ShellCommon = new Item(1015).setIconCoord(28,0).setItemName(name("shell.common"));
+    public static final Item shellCommon = new Item(1015).setIconCoord(28,0).setItemName(name("shell.common"));
     public static final Item shellCommon2 = new Item(1016).setIconCoord(29,0).setItemName(name("shell.common"));
     public static final Item shellCommon3 = new Item(1017).setIconCoord(30,0).setItemName(name("shell.common"));
     public static final Item shellRare = new Item(1018).setIconCoord(31,0).setItemName(name("shell.rare"));
@@ -141,16 +144,35 @@ public class Mod_Tropicraft implements ModInitializer {
         Item.itemsList[thatchSlabs.blockID] = new ItemBlock(thatchSlabs.blockID - 16384);
         Item.itemsList[thatchStairs.blockID] = new ItemBlock(thatchStairs.blockID - 16384);
 
+        // TODO - dye from flowers
         RecipeHelper.Crafting.createRecipe(bambooPlanks,1, new Object[]{"AA", "AA", 'A', bambooItem});
         RecipeHelper.Crafting.createRecipe(bambooPlanksSlab,6, new Object[]{"AAA", 'A', bambooPlanks});
         RecipeHelper.Crafting.createRecipe(bambooPlanksStairs,6, new Object[]{"A  ", "AA ", "AAA", 'A', bambooPlanks});
         RecipeHelper.Crafting.createRecipe(thatch,1, new Object[]{"AA", "AA", 'A', Item.sugarcane});
+
         ((CraftingManagerInterface) RecipeHelper.craftingManager).callAddShapelessRecipe(new ItemStack(Block.planksOakPainted, 4, 4), new Object[]{logPalm});
+
         RecipeHelper.Crafting.createRecipe(bambooMug,1, new Object[]{"A A", "A A", "AAA", 'A', bambooItem});
         RecipeHelper.Crafting.createRecipe(scaleHelmet,1, new Object[]{"AAA", "A A", 'A', scale});
         RecipeHelper.Crafting.createRecipe(scaleChestplate,1, new Object[]{"A A", "AAA", "AAA", 'A', scale});
         RecipeHelper.Crafting.createRecipe(scaleLeggings,1, new Object[]{"AAA", "A A", "A A", 'A', scale});
         RecipeHelper.Crafting.createRecipe(scaleBoots,1, new Object[]{"A A", "A A", 'A', scale});
         RecipeHelper.Crafting.createShapelessRecipe(bambooMugFull,1,new Object[]{Item.bucketMilk, coconutChunk, pineapple, bambooMug});
+
+        // TODO - This makes coal, not charcoal
+        // Replace with something like the shapeless recipe?
+        RecipeHelper.Smelting.createRecipe(new ItemStack(Item.coal, 1, 1).getItem(), logPalm);
+
+        // Entities
+        EntityHelper.createEntity(EntityFrog.class, new RenderFrog(new ModelFrog(), 0.3f),1000, name("frog"));
+        EntityHelper.createEntity(EntityFrogPoisonBlue.class, new RenderFrogPoisonBlue(new ModelFrog(), 0.3f), 1001, name("frogPoisonBlue"));
+        EntityHelper.createEntity(EntityFrogPoisonRed.class, new RenderFrogPoisonRed(new ModelFrog(), 0.3f), 1002, name("frogPoisonRed"));
+        EntityHelper.createEntity(EntityFrogPoisonYellow.class, new RenderFrogPoisonYellow(new ModelFrog(), 0.3f), 1003, name("frogPoisonYellow"));
+        EntityHelper.createEntity(EntityIguana.class, new RenderIguana(new ModelIguana(), 0.4f), 1004, name("iguana"));
+        EntityHelper.createEntity(EntityMoyai.class, new RenderMoyai(new ModelMoyai(),0.5f), 1005, name("moyai"));
+        EntityHelper.createEntity(EntityStarfishBlue.class, new RenderStarfishBlue(new ModelStarfish(), 0.3f), 1006, name("starfishBlue"));
+        EntityHelper.createEntity(EntityStarfishPink.class, new RenderStarfishPink(new ModelStarfish(), 0.3f), 1007, name("starfishPink"));
+        EntityHelper.createEntity(EntityStarfishYellow.class, new RenderStarfishYellow(new ModelStarfish(), 0.3f), 1008, name("starfishYellow"));
+        EntityHelper.createEntity(EntityVervet.class, new RenderVervet(new ModelVervet(), 0.5f), 1009, name("vervet"));
     }
 }
