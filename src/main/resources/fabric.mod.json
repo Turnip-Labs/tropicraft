@@ -1,28 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "tropicraft",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This mod aims to help new BTA modders.",
+  "name": "Tropicraft",
+  "description": "This mod is a port/remake of Tropicraft for BTA.",
   "authors": [
-    "Turnip Labs"
+    "Turnip Labs",
+    "Baboonbuddy"
   ],
   "contact": {
     "homepage": "",
     "sources": ""
   },
 
-  "license": "CC0-1.0",
+  "license": "MPL-2.0",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-        "turniplabs.examplemod.ExampleMod"
+        "turniplabs.tropicraft.Mod_Tropicraft"
     ]
   },
   "mixins": [
-      "examplemod.mixins.json"
+    "tropicraft.mixins.json"
   ],
 
   "depends": {
