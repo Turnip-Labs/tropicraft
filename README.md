@@ -5,6 +5,10 @@ This mod is licensed under Mozilla Public Lcense 2.0, and copyrighted by the Tro
 
 ## Setup instructions
 
-1. Download the MultiMC/Prism Launcher instance from the BTA discord.
+1. Download the MultiMC/Prism Launcher Babric instance from the BTA discord.
 
-2. Download and install this mod into the "mods" section of the instance.
+2. Download the latest zip from the right panel
+
+3. Extract resources to %appdata%/minecraft-bta/
+
+4. Install the jar file to your Babric instance mods folder
