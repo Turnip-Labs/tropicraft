@@ -16,13 +16,11 @@ public class BiomeGenTropics extends BiomeGenBase {
         spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 10));
         spawnableMonsterList.add(new SpawnListEntry(EntitySpider.class, 10));
         spawnableMonsterList.add(new SpawnListEntry(EntityMoyai.class, 1));
-        spawnableMonsterList.add(new SpawnListEntry(EntityFrogPoisonBlue.class, 17));
-        spawnableMonsterList.add(new SpawnListEntry(EntityFrogPoisonRed.class, 17));
-        spawnableMonsterList.add(new SpawnListEntry(EntityFrogPoisonYellow.class, 17));
+        spawnableMonsterList.add(new SpawnListEntry(EntityFrogPoisonBlue.class, 2));
 
         spawnableCreatureList.add(new SpawnListEntry(EntityPig.class, 51));
         spawnableCreatureList.add(new SpawnListEntry(EntityChicken.class, 51));
-        spawnableCreatureList.add(new SpawnListEntry(EntityFrog.class, 51));
+        spawnableCreatureList.add(new SpawnListEntry(EntityFrog.class, 32));
         spawnableCreatureList.add(new SpawnListEntry(EntityIguana.class, 102));
         spawnableCreatureList.add(new SpawnListEntry(EntityStarfishBlue.class, 17));
         spawnableCreatureList.add(new SpawnListEntry(EntityStarfishPink.class, 17));
