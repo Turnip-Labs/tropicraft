@@ -1,6 +1,10 @@
 package turniplabs.tropicraft.item;
 
-import net.minecraft.src.*;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Season;
+import net.minecraft.src.World;
 import turniplabs.tropicraft.Mod_Tropicraft;
 
 public class ItemPinaColada extends Item {
