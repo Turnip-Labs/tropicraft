@@ -49,6 +49,7 @@ addServer.save=Save
 dimension.overworld.name=the Overworld
 dimension.hell.name=the Nether
 dimension.paradise.name=Paradise
+dimension.tropicraft.tropics.name=the Tropics
 
 season.surfacespring.name=Spring
 season.surfacesummer.name=Summer
@@ -78,6 +79,7 @@ worldType.ruins.name=Ruins
 worldType.dungeons.name=Dungeon Crawler
 worldType.deeper.name=Extended Default
 worldType.void.name=Void
+worldType.tropics.name=Tropics
 
 multiplayer.title=Connect to IP
 multiplayer.connect=Connect

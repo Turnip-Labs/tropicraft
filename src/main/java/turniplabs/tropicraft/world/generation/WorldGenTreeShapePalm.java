@@ -1,4 +1,4 @@
-package turniplabs.tropicraft.world;
+package turniplabs.tropicraft.world.generation;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.World;

@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class BlockPineapple extends Block {
     public boolean isTop;
+
     public BlockPineapple(int i, boolean isTop, Material material) {
         super(i, material);
         this.isTop = isTop;
@@ -33,18 +34,15 @@ public class BlockPineapple extends Block {
         return null;
     }
 
-    // TODO - pineapples should grow the top half after 6000~ ticks
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, int l) {
         Block otherBlock;
-        if (this.isTop) {
-            otherBlock = Block.blocksList[world.getBlockId(x, y - 1, z)];
-        } else {
-            otherBlock = Block.blocksList[world.getBlockId(x, y + 1, z)];
-        }
-        if (!(otherBlock instanceof BlockIris) || world.getBlockId(x, y - 1, z) == 0) {
+        if (this.isTop) otherBlock = Block.blocksList[world.getBlockId(x, y - 1, z)];
+        else otherBlock = Block.blocksList[world.getBlockId(x, y + 1, z)];
+
+        if (!(otherBlock instanceof BlockPineapple) || world.getBlockId(x, y - 1, z) == 0) {
             world.setBlockWithNotify(x, y, z, 0);
-            world.dropItem(x, y, z, new ItemStack(Mod_Tropicraft.pineapple));
+            if (!isTop) world.dropItem(x, y, z, new ItemStack(Mod_Tropicraft.pineapple));
         }
     }
 

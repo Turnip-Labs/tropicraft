@@ -2,7 +2,7 @@ package turniplabs.tropicraft.block;
 
 import net.minecraft.src.*;
 import turniplabs.tropicraft.Mod_Tropicraft;
-import turniplabs.tropicraft.world.*;
+import turniplabs.tropicraft.world.generation.WorldGenTreeShapePalm;
 
 import java.util.Random;
 

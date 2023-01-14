@@ -36,14 +36,12 @@ public class BlockIris extends Block {
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, int l) {
         Block otherBlock;
-        if (this.isTop) {
-            otherBlock = Block.blocksList[world.getBlockId(x, y - 1, z)];
-        } else {
-            otherBlock = Block.blocksList[world.getBlockId(x, y + 1, z)];
-        }
+        if (this.isTop) otherBlock = Block.blocksList[world.getBlockId(x, y - 1, z)];
+        else otherBlock = Block.blocksList[world.getBlockId(x, y + 1, z)];
+
         if (!(otherBlock instanceof BlockIris) || world.getBlockId(x, y - 1, z) == 0) {
             world.setBlockWithNotify(x, y, z, 0);
-            world.dropItem(x, y, z, new ItemStack(Mod_Tropicraft.iris));
+            if (!isTop) world.dropItem(x, y, z, new ItemStack(Mod_Tropicraft.iris));
         }
     }
 

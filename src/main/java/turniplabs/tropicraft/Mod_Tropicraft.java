@@ -14,12 +14,14 @@ import turniplabs.tropicraft.item.ItemIris;
 import turniplabs.tropicraft.item.ItemPinaColada;
 import turniplabs.tropicraft.item.ItemFoodPineapple;
 import turniplabs.tropicraft.item.ItemSeedsPineapple;
-
-import java.util.ArrayList;
-
+import turniplabs.tropicraft.world.BiomeGenTropics;
+import turniplabs.tropicraft.world.BiomeGenVolcano;
 
 public class Mod_Tropicraft implements ModInitializer {
     public static final String MOD_ID = "tropicraft";
+    public static BiomeGenVolcano biomeVolcano;
+    public static BiomeGenTropics biomeTropics;
+    public static WorldType worldTropics;
 
     public static String name(String name) {
         return Mod_Tropicraft.MOD_ID + "." + name;
@@ -79,6 +81,9 @@ public class Mod_Tropicraft implements ModInitializer {
         ((BlockInterface) tropicsPortal).callSetStepSound(Block.soundGlassFootstep);
         ((BlockInterface) tropicsPortal).callSetLightValue(0.75f);
     }
+
+    // Dimension
+    public static final Dimension dimensionTropics = DimensionHelper.createDimension(3, name("tropics"), Dimension.overworld, 1.0f, tropicsPortal, worldTropics, 0, 128);
 
     @Override
     public void onInitialize() {
@@ -149,6 +154,8 @@ public class Mod_Tropicraft implements ModInitializer {
         RecipeHelper.Crafting.createRecipe(bambooPlanksSlab,6, new Object[]{"AAA", 'A', bambooPlanks});
         RecipeHelper.Crafting.createRecipe(bambooPlanksStairs,6, new Object[]{"A  ", "AA ", "AAA", 'A', bambooPlanks});
         RecipeHelper.Crafting.createRecipe(thatch,1, new Object[]{"AA", "AA", 'A', Item.sugarcane});
+        RecipeHelper.Crafting.createRecipe(thatchSlabs, 6, new Object[]{"AAA", 'A', thatch});
+        RecipeHelper.Crafting.createRecipe(thatchStairs, 6, new Object[]{"A  ", "AA ", "AAA", 'A', thatch});
 
         ((CraftingManagerInterface) RecipeHelper.craftingManager).callAddShapelessRecipe(new ItemStack(Block.planksOakPainted, 4, 4), new Object[]{logPalm});
 
@@ -157,7 +164,7 @@ public class Mod_Tropicraft implements ModInitializer {
         RecipeHelper.Crafting.createRecipe(scaleChestplate,1, new Object[]{"A A", "AAA", "AAA", 'A', scale});
         RecipeHelper.Crafting.createRecipe(scaleLeggings,1, new Object[]{"AAA", "A A", "A A", 'A', scale});
         RecipeHelper.Crafting.createRecipe(scaleBoots,1, new Object[]{"A A", "A A", 'A', scale});
-        RecipeHelper.Crafting.createShapelessRecipe(bambooMugFull,1,new Object[]{Item.bucketMilk, coconutChunk, pineapple, bambooMug});
+        RecipeHelper.Crafting.createShapelessRecipe(bambooMugFull,1,new Object[]{Item.bucketMilk, coconutChunk, pineapple, bambooMug, Item.cherry});
 
         // TODO - This makes coal, not charcoal
         // Replace with something like the shapeless recipe?

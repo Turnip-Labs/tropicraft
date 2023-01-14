@@ -14,7 +14,7 @@ public class EntityMoyai extends EntityMob {
         this.isImmuneToFire = true;
         this.scoreValue = 300;
         this.setSize(1.0F, 3.0F);
-        this.moveSpeed = this.angerLevel > 0 ? 0.1F : 0.0F;
+        this.moveSpeed = movement();
     }
 
     public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
@@ -84,5 +84,11 @@ public class EntityMoyai extends EntityMob {
     @Override
     public int getMaxSpawnedInChunk() {
         return 3;
+    }
+
+    // Why does this not work?
+    private float movement() {
+        if (angerLevel > 0) return 1.0f;
+        return 0.0f;
     }
 }
