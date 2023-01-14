@@ -18,6 +18,7 @@ public class WorldGenHead extends WorldGenerator {
                 int workY;
                 int workZ;
 
+                // main body
                 for (workY = -5; workY < 7; workY++) {
                     for (workX = 0; workX < 4; workX++) {
                         world.setBlockRaw(x + workX, y + workY, z + 1, Mod_Tropicraft.headChunk.blockID);
@@ -36,6 +37,7 @@ public class WorldGenHead extends WorldGenerator {
                     }
                 }
 
+                // mouth
                 for (workY = 2; workY < 4; workY++) {
                     for (workZ = 0; workZ < 4; workZ++) {
                         world.setBlock(x, y + workY, z + workZ, Mod_Tropicraft.headChunk.blockID);
@@ -49,6 +51,7 @@ public class WorldGenHead extends WorldGenerator {
                     world.setBlock(x + 2, y + workY, z + 3, Mod_Tropicraft.headChunk.blockID);
                 }
 
+                // back
                 world.setBlock(x, y + 4, z, Mod_Tropicraft.headChunk.blockID);
                 world.setBlock(x, y + 4, z + 3, Mod_Tropicraft.headChunk.blockID);
 
