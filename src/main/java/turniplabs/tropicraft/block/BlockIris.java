@@ -41,7 +41,7 @@ public class BlockIris extends Block {
 
         if (!(otherBlock instanceof BlockIris) || world.getBlockId(x, y - 1, z) == 0) {
             world.setBlockWithNotify(x, y, z, 0);
-            if (!isTop) world.dropItem(x, y, z, new ItemStack(Mod_Tropicraft.iris));
+            if (!isTop) world.dropItem(x, y, z, new ItemStack(Mod_Tropicraft.flowerIris));
         }
     }
 
@@ -58,7 +58,7 @@ public class BlockIris extends Block {
 
     @Override
     public int idDropped(int i, Random random) {
-        return Mod_Tropicraft.iris.itemID;
+        return Mod_Tropicraft.flowerIris.itemID;
     }
 
     protected boolean canThisPlantGrowOnThisBlockID(int i) {
