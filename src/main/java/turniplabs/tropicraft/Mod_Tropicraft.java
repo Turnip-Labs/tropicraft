@@ -3,6 +3,8 @@ package turniplabs.tropicraft;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.src.*;
 import net.minecraft.src.material.ArmorMaterial;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.*;
 import turniplabs.halplibe.mixin.helper.BlockInterface;
 import turniplabs.halplibe.mixin.helper.CraftingManagerInterface;
@@ -10,10 +12,7 @@ import turniplabs.tropicraft.block.*;
 import turniplabs.tropicraft.entity.*;
 import turniplabs.tropicraft.entity.model.*;
 import turniplabs.tropicraft.entity.render.*;
-import turniplabs.tropicraft.item.ItemIris;
-import turniplabs.tropicraft.item.ItemPinaColada;
-import turniplabs.tropicraft.item.ItemFoodPineapple;
-import turniplabs.tropicraft.item.ItemSeedsPineapple;
+import turniplabs.tropicraft.item.*;
 import turniplabs.tropicraft.world.BiomeGenTropics;
 import turniplabs.tropicraft.world.BiomeGenVolcano;
 
@@ -26,6 +25,12 @@ public class Mod_Tropicraft implements ModInitializer {
     public static String name(String name) {
         return Mod_Tropicraft.MOD_ID + "." + name;
     }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+    public static void info(Object obj) { LOGGER.info(String.valueOf(obj)); }
+    public static void warn(Object obj) { LOGGER.warn(String.valueOf(obj)); }
+
 
     // Materials
     public static final ArmorMaterial scaleMaterial = ArmorHelper.createArmorMaterial("scale", 200, 30.0f, 0.0f, 120.0f, 0.0f);
@@ -55,26 +60,26 @@ public class Mod_Tropicraft implements ModInitializer {
     public static final Block thatchStairs = BlockHelper.createBlock(new BlockStairs(1020, thatch), name("stairs.thatch"), 28, 1, Block.soundGrassFootstep, 0.6f, 0.6f, 0.0f);
 
     // Items
-    public static final Item scaleHelmet = new ItemArmor(1011, scaleMaterial, 0).setIconCoord(17, 0).setItemName(name("armor.helmet.scale"));
-    public static final Item scaleChestplate = new ItemArmor(1012, scaleMaterial, 1).setIconCoord(17, 1).setItemName(name("armor.chestplate.scale"));
-    public static final Item scaleLeggings = new ItemArmor(1013, scaleMaterial, 2).setIconCoord(17, 2).setItemName(name("armor.leggings.scale"));
-    public static final Item scaleBoots = new ItemArmor(1014, scaleMaterial, 3).setIconCoord(17, 3).setItemName(name("armor.boots.scale"));
-    public static final Item bambooItem = new ItemSugarcane(1000, bambooBlock).setIconCoord(17,4).setItemName(name("bamboo"));
-    public static final Item bambooMug = new Item(1001).setIconCoord(17,5).setItemName(name("mug"));
-    public static final Item bambooMugFull = new ItemPinaColada(1002).setIconCoord(17,6).setItemName(name("mug.full"));
-    public static final Item coconutChunk = new ItemFoodStackable(1003, 2, false, 4).setIconCoord(17,7).setItemName(name("food.coconut"));
-    public static final Item frogLeg = new ItemFood(1004, 1, true).setIconCoord(17,8).setItemName(name("food.frog.raw"));
-    public static final Item frogLegCooked = new ItemFood(1005,5,true).setIconCoord(17,9).setItemName(name("food.frog.cooked"));
-    public static final Item frogSkin = new Item(1006).setIconCoord(17,10).setItemName(name("frog.skin"));
-    public static final Item iris = new ItemIris(1007).setIconCoord(17,11).setItemName(name("iris"));
-    public static final Item pineapple = new ItemFoodPineapple(1008,2, false).setIconCoord(17,12).setItemName(name("food.pineapple"));
-    public static final Item pineappleSeeds = new ItemSeedsPineapple(1009).setIconCoord(17,13).setItemName(name("seeds.pineapple"));
-    public static final Item scale = new Item(1010).setIconCoord(17,14).setItemName(name("scale"));
-    public static final Item shellCommon = new Item(1015).setIconCoord(17,15).setItemName(name("shell.common"));
-    public static final Item shellCommon2 = new Item(1016).setIconCoord(17,16).setItemName(name("shell.common"));
-    public static final Item shellCommon3 = new Item(1017).setIconCoord(17,17).setItemName(name("shell.common"));
-    public static final Item shellRare = new Item(1018).setIconCoord(17,18).setItemName(name("shell.rare"));
-    public static final Item starfish = new Item(1019).setIconCoord(17,19).setItemName(name("starfish"));
+    public static final Item bambooItem = new ItemSugarcane(1000, bambooBlock).setIconCoord(17,0).setItemName(name("bamboo"));
+    public static final Item bambooMug = new Item(1001).setIconCoord(18,0).setItemName(name("mug"));
+    public static final Item bambooMugFull = new ItemPinaColada(1002).setIconCoord(19,0).setItemName(name("mug.full"));
+    public static final Item coconutChunk = new ItemFoodStackable(1003, 2, false, 4).setIconCoord(20,0).setItemName(name("food.coconut"));
+    public static final Item frogLeg = new ItemFood(1004, 1, true).setIconCoord(21,0).setItemName(name("food.frog.raw"));
+    public static final Item frogLegCooked = new ItemFood(1005,5,true).setIconCoord(22,0).setItemName(name("food.frog.cooked"));
+    public static final Item frogSkin = new Item(1006).setIconCoord(23,0).setItemName(name("frog.skin"));
+    public static final Item iris = new ItemIris(1007).setIconCoord(24,0).setItemName(name("iris"));
+    public static final Item pineapple = new ItemFoodPineapple(1008,2, false).setIconCoord(25,0).setItemName(name("food.pineapple"));
+    public static final Item pineappleSeeds = new ItemSeedsPineapple(1009).setIconCoord(26,0).setItemName(name("seeds.pineapple"));
+    public static final Item scale = new Item(1010).setIconCoord(27,0).setItemName(name("scale"));
+    public static final Item scaleHelmet = new ItemArmor(1011, scaleMaterial, 0).setIconCoord(16, 0).setItemName(name("armor.helmet.scale"));
+    public static final Item scaleChestplate = new ItemArmor(1012, scaleMaterial, 1).setIconCoord(16, 1).setItemName(name("armor.chestplate.scale"));
+    public static final Item scaleLeggings = new ItemArmor(1013, scaleMaterial, 2).setIconCoord(16, 2).setItemName(name("armor.leggings.scale"));
+    public static final Item scaleBoots = new ItemArmor(1014, scaleMaterial, 3).setIconCoord(16, 3).setItemName(name("armor.boots.scale"));
+    public static final Item shellCommon = new Item(1015).setIconCoord(28,0).setItemName(name("shell.common"));
+    public static final Item shellCommon2 = new Item(1016).setIconCoord(29,0).setItemName(name("shell.common"));
+    public static final Item shellCommon3 = new Item(1017).setIconCoord(30,0).setItemName(name("shell.common"));
+    public static final Item shellRare = new Item(1018).setIconCoord(31,0).setItemName(name("shell.rare"));
+    public static final Item starfish = new Item(1019).setIconCoord(17,1).setItemName(name("starfish"));
 
     static {
         ((BlockInterface) tropicsPortal).callSetBlockUnbreakable();
@@ -105,26 +110,26 @@ public class Mod_Tropicraft implements ModInitializer {
         TextureHelper.addTextureToTerrain(MOD_ID, "sand_purified.png", 27, 1);
         TextureHelper.addTextureToTerrain(MOD_ID, "thatch.png", 28, 1);
 
-        TextureHelper.addTextureToItems(MOD_ID, "scaled_helmet.png", 17, 0);
-        TextureHelper.addTextureToItems(MOD_ID, "scaled_chestplate.png", 17, 1);
-        TextureHelper.addTextureToItems(MOD_ID, "scaled_leggings.png", 17, 2);
-        TextureHelper.addTextureToItems(MOD_ID, "scaled_boots.png", 17, 3);
-        TextureHelper.addTextureToItems(MOD_ID, "bamboo_item.png", 17, 4);
-        TextureHelper.addTextureToItems(MOD_ID, "bamboo_mug.png", 17, 5);
-        TextureHelper.addTextureToItems(MOD_ID, "bamboo_mug_full.png", 17, 6);
-        TextureHelper.addTextureToItems(MOD_ID, "coconut_chunk.png", 17, 7);
-        TextureHelper.addTextureToItems(MOD_ID, "frog_leg.png", 17, 8);
-        TextureHelper.addTextureToItems(MOD_ID, "frog_leg_cooked.png", 17, 9);
-        TextureHelper.addTextureToItems(MOD_ID, "frog_skin.png", 17, 10);
-        TextureHelper.addTextureToItems(MOD_ID, "iris_item.png", 17,11);
-        TextureHelper.addTextureToItems(MOD_ID, "pineapple.png", 17,12);
-        TextureHelper.addTextureToItems(MOD_ID, "pineapple_seeds.png", 17, 13);
-        TextureHelper.addTextureToItems(MOD_ID, "scale.png", 17, 14);
-        TextureHelper.addTextureToItems(MOD_ID, "shell_common.png", 17, 15);
-        TextureHelper.addTextureToItems(MOD_ID, "shell_common_2.png", 17, 16);
-        TextureHelper.addTextureToItems(MOD_ID, "shell_common_3.png", 17, 17);
-        TextureHelper.addTextureToItems(MOD_ID, "shell_rare.png", 17, 18);
-        TextureHelper.addTextureToItems(MOD_ID, "starfish.png", 17, 19);
+        TextureHelper.addTextureToItems(MOD_ID, "bamboo_item.png", 17, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "bamboo_mug.png", 18, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "bamboo_mug_full.png", 19, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "coconut_chunk.png", 20, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "frog_leg.png", 21, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "frog_leg_cooked.png", 22, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "frog_skin.png", 23, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "iris_item.png", 24,0);
+        TextureHelper.addTextureToItems(MOD_ID, "pineapple.png", 25,0);
+        TextureHelper.addTextureToItems(MOD_ID, "pineapple_seeds.png", 26, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "scale.png", 27, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "scaled_helmet.png", 16, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "scaled_chestplate.png", 16, 1);
+        TextureHelper.addTextureToItems(MOD_ID, "scaled_leggings.png", 16, 2);
+        TextureHelper.addTextureToItems(MOD_ID, "scaled_boots.png", 16, 3);
+        TextureHelper.addTextureToItems(MOD_ID, "shell_common.png", 28, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "shell_common_2.png", 29, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "shell_common_3.png", 30, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "shell_rare.png", 31, 0);
+        TextureHelper.addTextureToItems(MOD_ID, "starfish.png", 17, 1);
 
         // Crafting
         Item.itemsList[tropicsPortal.blockID] = new ItemBlock(tropicsPortal.blockID - 16384);
@@ -166,9 +171,7 @@ public class Mod_Tropicraft implements ModInitializer {
         RecipeHelper.Crafting.createRecipe(scaleBoots,1, new Object[]{"A A", "A A", 'A', scale});
         RecipeHelper.Crafting.createShapelessRecipe(bambooMugFull,1,new Object[]{Item.bucketMilk, coconutChunk, pineapple, bambooMug, Item.cherry});
 
-        // TODO - This makes coal, not charcoal
-        // Replace with something like the shapeless recipe?
-        RecipeHelper.Smelting.createRecipe(new ItemStack(Item.coal, 1, 1).getItem(), logPalm);
+        RecipeHelper.smeltingManager.addSmelting(logPalm.blockID, new ItemStack(Item.coal, 1, 1));
 
         // Entities
         EntityHelper.createEntity(EntityFrog.class, new RenderFrog(new ModelFrog(), 0.3f),1000, name("frog"));
