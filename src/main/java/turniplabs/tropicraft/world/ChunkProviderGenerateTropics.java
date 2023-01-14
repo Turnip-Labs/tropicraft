@@ -311,6 +311,7 @@ public class ChunkProviderGenerateTropics extends ChunkProviderGenerateOverworld
             new WorldGenFlowers(flowerRed.blockID).generate(worldObj, rand, x1, y1, z1);
         }
 
+        // heads
         if (rand.nextInt(100) == 0) {
             int x1 = x + rand.nextInt(16) + 8;
             int y1 = rand.nextInt(terrainMaxHeight);
