@@ -13,8 +13,9 @@ public class EntityMoyai extends EntityMob {
         super(world);
         this.isImmuneToFire = true;
         this.scoreValue = 300;
+        this.health = 30;
         this.setSize(1.0F, 3.0F);
-        this.moveSpeed = movement();
+        this.moveSpeed = 0.0F;
     }
 
     public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
@@ -86,9 +87,12 @@ public class EntityMoyai extends EntityMob {
         return 3;
     }
 
-    // Why does this not work?
-    private float movement() {
-        if (angerLevel > 0) return 1.0f;
-        return 0.0f;
+    public void onLivingUpdate() {
+        // set move speed to 0 if not angered
+        if (angerLevel > 0) this.moveSpeed = 1.0f;
+        else this.moveSpeed = 0.0F;
+
+        super.onLivingUpdate();
     }
+
 }
