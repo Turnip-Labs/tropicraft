@@ -10,6 +10,7 @@ public class ItemPinaColada extends Item {
 
     public ItemPinaColada(int i) {
         super(i);
+        maxStackSize = 1;
     }
 
     @Override
