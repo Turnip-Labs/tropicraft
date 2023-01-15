@@ -42,7 +42,7 @@ public class BlockPineapple extends Block {
 
         if (!(otherBlock instanceof BlockPineapple) || world.getBlockId(x, y - 1, z) == 0) {
             world.setBlockWithNotify(x, y, z, 0);
-            if (!isTop) world.dropItem(x, y, z, new ItemStack(Mod_Tropicraft.pineapple));
+            if (isTop) world.dropItem(x, y, z, new ItemStack(Mod_Tropicraft.pineapple));
         }
     }
 
@@ -59,7 +59,8 @@ public class BlockPineapple extends Block {
 
     @Override
     public int idDropped(int i, Random random) {
-        return Mod_Tropicraft.pineapple.itemID;
+        if (isTop) return Mod_Tropicraft.pineapple.itemID;
+        else return 0;
     }
 
     protected boolean canThisPlantGrowOnThisBlockID(int i) {
