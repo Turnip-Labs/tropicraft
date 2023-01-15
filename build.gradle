@@ -75,7 +75,8 @@ dependencies {
 	include "org.apache.commons:commons-lang3:3.12.0"
 
 	// Prism Config
-	implementation "io.github.prismwork:prismconfig:0.2.0:all"
+	modImplementation "io.github.prismwork:prismconfig:0.2.0:all"
+	include "io.github.prismwork:prismconfig:0.2.0:all"
 }
 
 java {

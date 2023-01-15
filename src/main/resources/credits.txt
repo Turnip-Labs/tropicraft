@@ -1,7 +1,10 @@
-Jonkadelic & pkst - Code Help
+Jonkadelic - Code Help
+Peakstep/pkst - Code help & Prism Config code
 Richard Dickson & NOTHINGTHERE - Textures
 AzureLMAO - Example Mod code
+Kheprep - Various fixes and post-release features
 Ambos
+
 
 Tropicraft team - most of the original content (and for letting me make the mod)
 
