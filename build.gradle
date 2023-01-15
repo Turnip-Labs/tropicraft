@@ -23,6 +23,14 @@ repositories {
 		name = 'Fabric'
 		url = 'https://maven.fabricmc.net/'
 	}
+	maven {
+		name = "Nova Committee - Release"
+		url = "https://maven.nova-committee.cn/releases/"
+	}
+	maven {
+		name = "Nova Committee - Snapshot"
+		url = "https://maven.nova-committee.cn/snapshots/"
+	}
 	ivy {
 		url = "https://github.com/Better-than-Adventure"
 		patternLayout {
@@ -66,6 +74,8 @@ dependencies {
 	modImplementation "org.apache.commons:commons-lang3:3.12.0"
 	include "org.apache.commons:commons-lang3:3.12.0"
 
+	// Prism Config
+	implementation "io.github.prismwork:prismconfig:0.2.0:all"
 }
 
 java {

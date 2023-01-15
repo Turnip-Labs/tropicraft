@@ -1,6 +1,9 @@
 package turniplabs.tropicraft;
 
+import io.github.prismwork.prismconfig.api.PrismConfig;
+import io.github.prismwork.prismconfig.api.config.DefaultSerializers;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.src.*;
 import net.minecraft.src.material.ArmorMaterial;
 import org.slf4j.Logger;
@@ -9,6 +12,7 @@ import turniplabs.halplibe.helper.*;
 import turniplabs.halplibe.mixin.helper.BlockInterface;
 import turniplabs.halplibe.mixin.helper.CraftingManagerInterface;
 import turniplabs.tropicraft.block.*;
+import turniplabs.tropicraft.config.TropicraftConfig;
 import turniplabs.tropicraft.entity.*;
 import turniplabs.tropicraft.entity.model.*;
 import turniplabs.tropicraft.entity.render.*;
@@ -16,11 +20,16 @@ import turniplabs.tropicraft.item.*;
 import turniplabs.tropicraft.world.BiomeGenTropics;
 import turniplabs.tropicraft.world.BiomeGenVolcano;
 
+import java.io.File;
+
 public class Mod_Tropicraft implements ModInitializer {
     public static final String MOD_ID = "tropicraft";
     public static BiomeGenVolcano biomeVolcano;
     public static BiomeGenTropics biomeTropics;
     public static WorldType worldTropics;
+    public static TropicraftConfig.Config config;
+
+    private static final File configFile = FabricLoader.getInstance().getConfigDir().resolve("tropicraftConfig.json5").toFile();
 
     public static String name(String name) {
         return Mod_Tropicraft.MOD_ID + "." + name;
@@ -31,55 +40,61 @@ public class Mod_Tropicraft implements ModInitializer {
     public static void info(Object obj) { LOGGER.info(String.valueOf(obj)); }
     public static void warn(Object obj) { LOGGER.warn(String.valueOf(obj)); }
 
+    static File content;
+    static TropicraftConfig.Config tropicConfig = PrismConfig.getInstance().serialize(
+            TropicraftConfig.Config.class,
+            content = configFile,
+            DefaultSerializers.getInstance().json5(TropicraftConfig.Config.class) // We assume that your config is written in JSON5
+    );
 
     // Materials
     public static final ArmorMaterial scaleMaterial = ArmorHelper.createArmorMaterial("scale", 200, 30.0f, 0.0f, 120.0f, 0.0f);
 
     // Blocks
-    public static final Block tropicsPortal = new BlockPortal(1000, 3, Block.sandstone.blockID, Block.fluidWaterStill.blockID).setBlockName("portal.tropics").setTexCoords(13, 12).setNotInCreativeMenu();
+    public static final Block tropicsPortal = new BlockPortal(tropicConfig.portal, 3, Block.sandstone.blockID, Block.fluidWaterStill.blockID).setBlockName("portal.tropics").setTexCoords(13, 12).setNotInCreativeMenu();
 
-    public static final Block bambooBlock = BlockHelper.createBlock(new BlockBamboo(1001), name("bamboo"), 25, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
-    public static final Block bambooPlanks = BlockHelper.createBlock(new Block(1002, Material.wood), name("planks.bamboo"), 26, 0, Block.soundWoodFootstep,2.0f,3.0f, 0.0f);
-    public static final Block bambooPlanksSlab = BlockHelper.createBlock(new BlockSlab(1003,bambooPlanks), name("slab.planks.bamboo"),26, 0, Block.soundWoodFootstep,2.0f, 3.0f, 0.0f);
-    public static final Block bambooPlanksStairs = BlockHelper.createBlock(new BlockStairs(1004, bambooPlanks), name("stairs.planks.bamboo"), 26, 0, Block.soundWoodFootstep, 2.0f,  3.0f, 0.0f);
-    public static final Block coconut = BlockHelper.createBlock(new BlockCoconut(1005, Material.wood), name("coconut"), 27, 0, Block.soundWoodFootstep, 0.5f, 0.5f, 0.0f);
-    public static final Block flowerDayFlower = BlockHelper.createBlock(new BlockFlower(1006), name("flower.dayflower"), 28, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f);
-    public static final Block flowerMontbretia = BlockHelper.createBlock(new BlockFlower(1007), name("flower.montbretia"), 29, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f);
-    public static final Block flowerOrchid = BlockHelper.createBlock(new BlockFlower(1008), name("flower.orchid"), 30, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f);
-    public static final Block headChunk = BlockHelper.createBlock(new Block(1009, Material.rock), name("head"), 31, 0, Block.soundStoneFootstep, 3.0f, 6.0f, 0.0f);
-    public static final Block irisBottom = BlockHelper.createBlock(new BlockIris(1010, false, Material.plants), name("iris"), 22, 1, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
-    public static final Block irisTop = BlockHelper.createBlock(new BlockIris(1011, true, Material.plants), name("iris"), 22, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
-    public static final Block leavesPalm = BlockHelper.createBlock(new BlockLeavesPalm(1012, Material.leaves, true),name("leaves.palm"),25,1,Block.soundGrassFootstep,0.2f, 0.2f, 0.0f);
-    public static final Block logPalm = BlockHelper.createBlock(new BlockLog(1013), name("log.palm"),24,1, 24,1, 24,0, Block.soundWoodFootstep, 2.0f, 2.0f, 0.0f);
-    public static final Block saplingPalm = BlockHelper.createBlock(new BlockSaplingPalm(1014), name("sapling.palm"), 26, 1, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f);
-    public static final Block pineappleBottom = BlockHelper.createBlock(new BlockPineapple(1015, false, Material.plants), name("pineapple"),23, 1, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
-    public static final Block pineappleTop = BlockHelper.createBlock(new BlockPineapple(1016, true, Material.plants), name("pineapple"), 23, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
-    public static final Block sandPurified = BlockHelper.createBlock(new BlockSand(1017), name("sand.purified"), 27, 1, Block.soundSandFootstep,0.5f, 0.5f, 0.0f);
-    public static final Block thatch = BlockHelper.createBlock(new Block(1018, Material.plants), name("thatch"), 28, 1, Block.soundGrassFootstep, 0.6f, 0.6f, 0.0f);
-    public static final Block thatchSlabs = BlockHelper.createBlock(new BlockSlab(1019, thatch), name("slab.thatch"), 28, 1, Block.soundGrassFootstep, 0.6f, 0.6f, 0.0f);
-    public static final Block thatchStairs = BlockHelper.createBlock(new BlockStairs(1020, thatch), name("stairs.thatch"), 28, 1, Block.soundGrassFootstep, 0.6f, 0.6f, 0.0f);
+    public static final Block bambooBlock = BlockHelper.createBlock(new BlockBamboo(tropicConfig.bamboo), name("bamboo"), 25, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
+    public static final Block bambooPlanks = BlockHelper.createBlock(new Block(tropicConfig.bambooPlanks, Material.wood), name("planks.bamboo"), 26, 0, Block.soundWoodFootstep,2.0f,3.0f, 0.0f);
+    public static final Block bambooPlanksSlab = BlockHelper.createBlock(new BlockSlab(tropicConfig.bambooPlankSlab,bambooPlanks), name("slab.planks.bamboo"),26, 0, Block.soundWoodFootstep,2.0f, 3.0f, 0.0f);
+    public static final Block bambooPlanksStairs = BlockHelper.createBlock(new BlockStairs(tropicConfig.bambooPlankStairs, bambooPlanks), name("stairs.planks.bamboo"), 26, 0, Block.soundWoodFootstep, 2.0f,  3.0f, 0.0f);
+    public static final Block coconut = BlockHelper.createBlock(new BlockCoconut(tropicConfig.coconut, Material.wood), name("coconut"), 27, 0, Block.soundWoodFootstep, 0.5f, 0.5f, 0.0f);
+    public static final Block flowerDayFlower = BlockHelper.createBlock(new BlockFlower(tropicConfig.dayflower), name("flower.dayflower"), 28, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f);
+    public static final Block flowerMontbretia = BlockHelper.createBlock(new BlockFlower(tropicConfig.montbretia), name("flower.montbretia"), 29, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f);
+    public static final Block flowerOrchid = BlockHelper.createBlock(new BlockFlower(tropicConfig.orchid), name("flower.orchid"), 30, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f);
+    public static final Block headChunk = BlockHelper.createBlock(new Block(tropicConfig.chunkOHead, Material.rock), name("head"), 31, 0, Block.soundStoneFootstep, 3.0f, 6.0f, 0.0f);
+    public static final Block irisBottom = BlockHelper.createBlock(new BlockIris(tropicConfig.irisBottom, false, Material.plants), name("iris"), 22, 1, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
+    public static final Block irisTop = BlockHelper.createBlock(new BlockIris(tropicConfig.irisTop, true, Material.plants), name("iris"), 22, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
+    public static final Block leavesPalm = BlockHelper.createBlock(new BlockLeavesPalm(tropicConfig.palmLeaves, Material.leaves, true),name("leaves.palm"),25,1,Block.soundGrassFootstep,0.2f, 0.2f, 0.0f);
+    public static final Block logPalm = BlockHelper.createBlock(new BlockLog(tropicConfig.palmLog), name("log.palm"),24,1, 24,1, 24,0, Block.soundWoodFootstep, 2.0f, 2.0f, 0.0f);
+    public static final Block saplingPalm = BlockHelper.createBlock(new BlockSaplingPalm(tropicConfig.palmSapling), name("sapling.palm"), 26, 1, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f);
+    public static final Block pineappleBottom = BlockHelper.createBlock(new BlockPineapple(tropicConfig.pineappleBottom, false, Material.plants), name("pineapple"),23, 1, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
+    public static final Block pineappleTop = BlockHelper.createBlock(new BlockPineapple(tropicConfig.pineappleTop, true, Material.plants), name("pineapple"), 23, 0, Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
+    public static final Block sandPurified = BlockHelper.createBlock(new BlockSand(tropicConfig.purifiedSand), name("sand.purified"), 27, 1, Block.soundSandFootstep,0.5f, 0.5f, 0.0f);
+    public static final Block thatch = BlockHelper.createBlock(new Block(tropicConfig.thatch, Material.plants), name("thatch"), 28, 1, Block.soundGrassFootstep, 0.6f, 0.6f, 0.0f);
+    public static final Block thatchSlabs = BlockHelper.createBlock(new BlockSlab(tropicConfig.thatchSlab, thatch), name("slab.thatch"), 28, 1, Block.soundGrassFootstep, 0.6f, 0.6f, 0.0f);
+    public static final Block thatchStairs = BlockHelper.createBlock(new BlockStairs(tropicConfig.thatchStairs, thatch), name("stairs.thatch"), 28, 1, Block.soundGrassFootstep, 0.6f, 0.6f, 0.0f);
 
     // Items
-    public static final Item scaleHelmet = new ItemArmor(1011, scaleMaterial, 0).setIconCoord(17, 0).setItemName(name("armor.helmet.scale"));
-    public static final Item scaleChestplate = new ItemArmor(1012, scaleMaterial, 1).setIconCoord(17, 1).setItemName(name("armor.chestplate.scale"));
-    public static final Item scaleLeggings = new ItemArmor(1013, scaleMaterial, 2).setIconCoord(17, 2).setItemName(name("armor.leggings.scale"));
-    public static final Item scaleBoots = new ItemArmor(1014, scaleMaterial, 3).setIconCoord(17, 3).setItemName(name("armor.boots.scale"));
-    public static final Item bambooItem = new ItemSugarcane(1000, bambooBlock).setIconCoord(17,4).setItemName(name("bamboo"));
-    public static final Item bambooMug = new Item(1001).setIconCoord(17,5).setItemName(name("mug"));
-    public static final Item bambooMugFull = new ItemPinaColada(1002).setIconCoord(17,6).setItemName(name("mug.full"));
-    public static final Item coconutChunk = new ItemFoodStackable(1003, 2, false, 4).setIconCoord(17,7).setItemName(name("food.coconut"));
-    public static final Item frogLeg = new ItemFood(1004, 1, true).setIconCoord(17,8).setItemName(name("food.frog.raw"));
-    public static final Item frogLegCooked = new ItemFood(1005,5,true).setIconCoord(17,9).setItemName(name("food.frog.cooked"));
-    public static final Item frogSkin = new Item(1006).setIconCoord(17,10).setItemName(name("frog.skin"));
-    public static final Item flowerIris = new ItemIris(1007).setIconCoord(17,11).setItemName(name("iris"));
-    public static final Item pineapple = new ItemFoodPineapple(1008,2, false).setIconCoord(17,12).setItemName(name("food.pineapple"));
-    public static final Item pineappleSeeds = new ItemSeedsPineapple(1009).setIconCoord(17,13).setItemName(name("seeds.pineapple"));
-    public static final Item scale = new Item(1010).setIconCoord(17,14).setItemName(name("scale"));
-    public static final Item shellCommon = new Item(1015).setIconCoord(17,15).setItemName(name("shell.common"));
-    public static final Item shellCommon2 = new Item(1016).setIconCoord(17,16).setItemName(name("shell.common"));
-    public static final Item shellCommon3 = new Item(1017).setIconCoord(17,17).setItemName(name("shell.common"));
-    public static final Item shellRare = new Item(1018).setIconCoord(17,18).setItemName(name("shell.rare"));
-    public static final Item starfish = new Item(1019).setIconCoord(17,19).setItemName(name("starfish"));
+    public static final Item scaleHelmet = new ItemArmor(tropicConfig.scaleHelmet, scaleMaterial, 0).setIconCoord(17, 0).setItemName(name("armor.helmet.scale"));
+    public static final Item scaleChestplate = new ItemArmor(tropicConfig.scaleChest, scaleMaterial, 1).setIconCoord(17, 1).setItemName(name("armor.chestplate.scale"));
+    public static final Item scaleLeggings = new ItemArmor(tropicConfig.scaleLegs, scaleMaterial, 2).setIconCoord(17, 2).setItemName(name("armor.leggings.scale"));
+    public static final Item scaleBoots = new ItemArmor(tropicConfig.scaleBoots, scaleMaterial, 3).setIconCoord(17, 3).setItemName(name("armor.boots.scale"));
+    public static final Item bambooItem = new ItemSugarcane(tropicConfig.bambooItem, bambooBlock).setIconCoord(17,4).setItemName(name("bamboo"));
+    public static final Item bambooMug = new Item(tropicConfig.bambooMug).setIconCoord(17,5).setItemName(name("mug"));
+    public static final Item bambooMugFull = new ItemPinaColada(tropicConfig.pinaColada).setIconCoord(17,6).setItemName(name("mug.full"));
+    public static final Item coconutChunk = new ItemFoodStackable(tropicConfig.coconutChunk, 2, false, 4).setIconCoord(17,7).setItemName(name("food.coconut"));
+    public static final Item frogLeg = new ItemFood(tropicConfig.rawFrog, 1, true).setIconCoord(17,8).setItemName(name("food.frog.raw"));
+    public static final Item frogLegCooked = new ItemFood(tropicConfig.cookedFrog,5,true).setIconCoord(17,9).setItemName(name("food.frog.cooked"));
+    public static final Item frogSkin = new Item(tropicConfig.frogLeather).setIconCoord(17,10).setItemName(name("frog.skin"));
+    public static final Item flowerIris = new ItemIris(tropicConfig.irisItem).setIconCoord(17,11).setItemName(name("iris"));
+    public static final Item pineapple = new ItemFoodPineapple(tropicConfig.pineappleItem,2, false).setIconCoord(17,12).setItemName(name("food.pineapple"));
+    public static final Item pineappleSeeds = new ItemSeedsPineapple(tropicConfig.pineappleSeeds).setIconCoord(17,13).setItemName(name("seeds.pineapple"));
+    public static final Item scale = new Item(tropicConfig.scale).setIconCoord(17,14).setItemName(name("scale"));
+    public static final Item shellCommon = new Item(tropicConfig.shell).setIconCoord(17,15).setItemName(name("shell.common"));
+    public static final Item shellCommon2 = new Item(tropicConfig.shell2).setIconCoord(17,16).setItemName(name("shell.common"));
+    public static final Item shellCommon3 = new Item(tropicConfig.shell3).setIconCoord(17,17).setItemName(name("shell.common"));
+    public static final Item shellRare = new Item(tropicConfig.shell4).setIconCoord(17,18).setItemName(name("shell.rare"));
+    public static final Item starfish = new Item(tropicConfig.seaStar).setIconCoord(17,19).setItemName(name("starfish"));
 
     static {
         ((BlockInterface) tropicsPortal).callSetBlockUnbreakable();
@@ -92,6 +107,8 @@ public class Mod_Tropicraft implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        config = TropicraftConfig.load(configFile);
+
         TextureHelper.addTextureToTerrain(MOD_ID,"bamboo.png", 25, 0);
         TextureHelper.addTextureToTerrain(MOD_ID, "bamboo_planks.png", 26, 0);
         TextureHelper.addTextureToTerrain(MOD_ID, "coconut.png", 27, 0);
