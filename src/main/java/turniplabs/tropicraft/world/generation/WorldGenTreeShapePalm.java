@@ -18,6 +18,7 @@ public class WorldGenTreeShapePalm extends WorldGenerator {
         this.coconutID = Mod_Tropicraft.coconut.blockID;
     }
 
+    //TODO - refactor this as well
     @Override
     public boolean generate(World world, Random random, int x, int y, int z) {
         byte byte0 = 5;
