@@ -8,7 +8,7 @@ import turniplabs.tropicraft.Mod_Tropicraft;
 public class EntityFrogPoisonBlue extends EntityFrog{
     public EntityFrogPoisonBlue(World world) {
         super(world);
-        this.texture = "/tropicraft/assets/entity/poison_frog_blue.png";
+        this.texture = "/assets/tropicraft/entity/poison_frog_blue.png";
     }
 
     @Override

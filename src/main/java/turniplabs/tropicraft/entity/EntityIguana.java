@@ -8,7 +8,7 @@ public class EntityIguana extends EntityAnimal {
     public EntityIguana(World world) {
         super(world);
         this.health = 9;
-        this.texture = "/tropicraft/assets/entity/iguana.png";
+        this.texture = "/assets/tropicraft/entity/iguana.png";
         this.setSize(0.3f, 0.4f);
         this.moveSpeed = 0.25f;
         this.isImmuneToFire = true;

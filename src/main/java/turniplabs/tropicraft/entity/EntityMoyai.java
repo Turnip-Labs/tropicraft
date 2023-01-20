@@ -57,8 +57,8 @@ public class EntityMoyai extends EntityMob {
 
     @Override
     public String getEntityTexture() {
-        if (this.angerLevel > 0) return "/tropicraft/assets/entity/moyai_angry.png";
-        return "/tropicraft/assets/entity/moyai.png";
+        if (this.angerLevel > 0) return "/assets/tropicraft/entity/moyai_angry.png";
+        return "/assets/tropicraft/entity/moyai.png";
     }
 
     @Override

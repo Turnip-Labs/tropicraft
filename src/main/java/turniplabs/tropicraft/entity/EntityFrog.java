@@ -8,7 +8,7 @@ public class EntityFrog extends EntityAnimal {
     public EntityFrog(World world) {
         super(world);
         this.health = 4;
-        this.texture = "/tropicraft/assets/entity/frog.png";
+        this.texture = "/assets/tropicraft/entity/frog.png";
         this.setSize(0.3f, 0.3f);
     }
 

@@ -11,7 +11,7 @@ public class EntityStarfishPink extends EntityLiving {
         this.health = 1;
         this.moveSpeed = 0.1f;
         this.setSize(0.6f,0.6f);
-        this.texture = "/tropicraft/assets/entity/starfish_pink.png";
+        this.texture = "/assets/tropicraft/entity/starfish_pink.png";
         this.canBreatheUnderwater();
     }
 

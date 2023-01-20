@@ -51,49 +51,61 @@ public class TropicraftConfig {
         );
     }
 
+    public static int blockIDs = 999;
+    public static int itemIDs = 999;
+
+
+    public static int nextBlock() {
+        return blockIDs++;
+    }
+
+    public static int nextItem() {
+        return itemIDs++;
+    }
+
     public static class Config {
         @Comment("Block IDs")
-        public int portal = 1000;
-        public int bamboo = 1001;
-        public int bambooPlanks = 1002;
-        public int bambooPlankSlab = 1003;
-        public int bambooPlankStairs = 1004;
-        public int coconut = 1005;
-        public int dayflower = 1006;
-        public int montbretia = 1007;
-        public int orchid = 1008;
-        public int chunkOHead = 1009;
-        public int irisBottom = 1010;
-        public int irisTop = 1011;
-        public int palmLeaves = 1012;
-        public int palmLog = 1013;
-        public int palmSapling = 1014;
-        public int pineappleBottom = 1015;
-        public int pineappleTop = 1016;
-        public int purifiedSand = 1017;
-        public int thatch = 1018;
-        public int thatchSlab = 1019;
-        public int thatchStairs = 1020;
+        public int portal = nextBlock();
+        public int bamboo = nextBlock();
+        public int bambooPlanks = nextBlock();
+        public int bambooPlankSlab = nextBlock();
+        public int bambooPlankStairs = nextBlock();
+        public int coconut = nextBlock();
+        public int dayflower = nextBlock();
+        public int montbretia = nextBlock();
+        public int orchid = nextBlock();
+        public int chunkOHead = nextBlock();
+        public int irisBottom = nextBlock();
+        public int irisTop = nextBlock();
+        public int palmLeaves = nextBlock();
+        public int palmLog = nextBlock();
+        public int palmSapling = nextBlock();
+        public int pineappleBottom = nextBlock();
+        public int pineappleTop = nextBlock();
+        public int purifiedSand = nextBlock();
+        public int thatch = nextBlock();
+        public int thatchSlab = nextBlock();
+        public int thatchStairs = nextBlock();
         @Comment("Item IDs")
-        public int bambooItem = 1000;
-        public int bambooMug = 1001;
-        public int pinaColada = 1002;
-        public int coconutChunk = 1003;
-        public int rawFrog = 1004;
-        public int cookedFrog = 1005;
-        public int frogLeather = 1006;
-        public int irisItem = 1007;
-        public int pineappleItem = 1008;
-        public int pineappleSeeds = 1009;
-        public int scale = 1010;
-        public int scaleHelmet = 1011;
-        public int scaleChest = 1012;
-        public int scaleLegs = 1013;
-        public int scaleBoots = 1014;
-        public int shell = 1015;
-        public int shell2 = 1016;
-        public int shell3 = 1017;
-        public int shell4 = 1018;
-        public int seaStar = 1019;
+        public int bambooItem = nextItem();
+        public int bambooMug = nextItem();
+        public int pinaColada = nextItem();
+        public int coconutChunk = nextItem();
+        public int rawFrog = nextItem();
+        public int cookedFrog = nextItem();
+        public int frogLeather = nextItem();
+        public int irisItem = nextItem();
+        public int pineappleItem = nextItem();
+        public int pineappleSeeds = nextItem();
+        public int scale = nextItem();
+        public int scaleHelmet = nextItem();
+        public int scaleChest = nextItem();
+        public int scaleLegs = nextItem();
+        public int scaleBoots = nextItem();
+        public int shell = nextItem();
+        public int shell2 = nextItem();
+        public int shell3 = nextItem();
+        public int shell4 = nextItem();
+        public int seaStar = nextItem();
     }
 }

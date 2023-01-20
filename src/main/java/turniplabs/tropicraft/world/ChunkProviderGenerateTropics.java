@@ -185,6 +185,7 @@ public class ChunkProviderGenerateTropics extends ChunkProviderGenerateOverworld
         for (int i6 = 0; i6 < treeDensity; ++i6) {
             int x1 = x + rand.nextInt(16) + 8;
             int z1 = z + rand.nextInt(16) + 8;
+            assert biomeGenBase != null;
             WorldGenerator worldGenerator = biomeGenBase.getRandomWorldGenForTrees(rand);
             worldGenerator.func_517_a(1.0d, 1.0d, 1.0d);
             worldGenerator.generate(worldObj, rand, x1, worldObj.getHeightValue(x1, z1), z1);
@@ -219,13 +220,13 @@ public class ChunkProviderGenerateTropics extends ChunkProviderGenerateOverworld
                     blockID = flowerYellow.blockID;
                     break;
                 case 1:
-                    blockID = flowerDayFlower.blockID;
+                    blockID = dayFlower.blockID;
                     break;
                 case 2:
-                    blockID = flowerMontbretia.blockID;
+                    blockID = montbretia.blockID;
                     break;
                 case 3:
-                    blockID = flowerOrchid.blockID;
+                    blockID = orchid.blockID;
                     break;
             }
 

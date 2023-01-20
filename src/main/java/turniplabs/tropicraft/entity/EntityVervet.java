@@ -4,9 +4,7 @@ import net.minecraft.src.*;
 import net.minecraft.src.helper.DamageType;
 import turniplabs.tropicraft.Mod_Tropicraft;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class EntityVervet extends EntityAnimal {
     private int angerLevel = 0;
@@ -14,7 +12,7 @@ public class EntityVervet extends EntityAnimal {
     public EntityVervet(World world) {
         super(world);
         this.health = 10;
-        this.texture = "/tropicraft/assets/entity/vervet.png";
+        this.texture = "/assets/tropicraft/entity/vervet.png";
         this.setSize(0.8f, 0.8f);
     }
 
