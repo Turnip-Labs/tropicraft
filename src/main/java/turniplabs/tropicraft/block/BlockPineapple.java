@@ -34,6 +34,7 @@ public class BlockPineapple extends Block {
         return null;
     }
 
+    // TODO : make it so the top regrows instead of instantly breaking/growing both parts
     @Override
     public void onNeighborBlockChange(World world, int x, int y, int z, int l) {
         Block otherBlock;

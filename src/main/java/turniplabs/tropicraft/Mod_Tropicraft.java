@@ -50,7 +50,7 @@ public class Mod_Tropicraft implements ModInitializer {
     public static final ArmorMaterial scaleMaterial = ArmorHelper.createArmorMaterial("scale", 200, 30.0f, 0.0f, 120.0f, 0.0f);
 
     // Blocks
-    public static final Block tropicsPortal = new BlockPortal(tropicConfig.portal, 3, Block.sandstone.blockID, Block.fluidWaterStill.blockID).setBlockName("portal.tropics").setTexCoords(13, 12).setNotInCreativeMenu();
+    public static final Block tropicsPortal = new BlockPortal(tropicConfig.portal, 3, Block.brickSandstone.blockID, Block.fluidWaterStill.blockID).setBlockName("portal.tropics").setTexCoords(13, 12).setNotInCreativeMenu();
 
     public static final Block bambooBlock = BlockHelper.createBlock(MOD_ID, new BlockSugarcane(tropicConfig.bamboo), "bamboo", "bamboo.png", Block.soundGrassFootstep, 0.0f, 0.0f, 0.0f).setNotInCreativeMenu();
     public static final Block bambooPlanks = BlockHelper.createBlock(MOD_ID, new Block(tropicConfig.bambooPlanks, Material.wood), "planks.bamboo", "bamboo_planks.png", Block.soundWoodFootstep, 2.0f, 3.0f, 0.0f);
@@ -108,10 +108,10 @@ public class Mod_Tropicraft implements ModInitializer {
     public void onInitialize() {
         config = TropicraftConfig.load(configFile);
 
-        RecipeHelper.Crafting.createRecipe(bambooPlanks,1, new Object[]{"AA", "AA", 'A', bambooItem});
+        RecipeHelper.Crafting.createRecipe(bambooPlanks,4, new Object[]{"AA", "AA", 'A', bambooItem});
         RecipeHelper.Crafting.createRecipe(bambooPlanksSlab,6, new Object[]{"AAA", 'A', bambooPlanks});
         RecipeHelper.Crafting.createRecipe(bambooPlanksStairs,6, new Object[]{"A  ", "AA ", "AAA", 'A', bambooPlanks});
-        RecipeHelper.Crafting.createRecipe(thatch,1, new Object[]{"AA", "AA", 'A', Item.sugarcane});
+        RecipeHelper.Crafting.createRecipe(thatch,4, new Object[]{"AA", "AA", 'A', Item.sugarcane});
         RecipeHelper.Crafting.createRecipe(thatchSlabs, 6, new Object[]{"AAA", 'A', thatch});
         RecipeHelper.Crafting.createRecipe(thatchStairs, 6, new Object[]{"A  ", "AA ", "AAA", 'A', thatch});
 

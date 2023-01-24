@@ -11,7 +11,7 @@ import turniplabs.tropicraft.Mod_Tropicraft;
 public class BlockFluidStillMixin {
 
     public void onBlockAdded(World world, int i, int j, int k) {
-        if (world.getBlockId(i, j - 1, k) == Block.sandstone.blockID) {
+        if (world.getBlockId(i, j - 1, k) == Block.brickSandstone.blockID) {
             ((BlockPortal) Mod_Tropicraft.tropicsPortal).tryToCreatePortal(world, i, j, k);
         }
     }
